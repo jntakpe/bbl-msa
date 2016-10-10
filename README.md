@@ -1,3 +1,3 @@
 # BBL Microservices
 
-Projet de démo d'une architecture microservices basée sur la stack Netflix.
+Projet de démo d'une architecture microservices basé sur la stack Netflix.
