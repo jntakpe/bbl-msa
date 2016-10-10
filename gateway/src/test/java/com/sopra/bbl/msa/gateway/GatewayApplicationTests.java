@@ -1,4 +1,4 @@
-package com.sopra.bbl.msa;
+package com.sopra.bbl.msa.gateway;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

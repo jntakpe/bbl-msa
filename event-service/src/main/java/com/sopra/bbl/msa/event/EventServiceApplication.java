@@ -1,16 +1,16 @@
-package com.sopra.bbl.msa;
+package com.sopra.bbl.msa.event;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 
-@EnableZuulProxy
-@EnableDiscoveryClient
+@EnableFeignClients
 @SpringBootApplication
-public class GatewayApplication {
+@EnableDiscoveryClient
+public class EventServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GatewayApplication.class, args);
+        SpringApplication.run(EventServiceApplication.class, args);
     }
 }

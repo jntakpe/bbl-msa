@@ -1,4 +1,4 @@
-package com.sopra.bbl.msa;
+package com.sopra.bbl.msa.registry;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
