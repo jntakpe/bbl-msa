@@ -1,0 +1,9 @@
+server:
+  port: 8080
+zuul:
+  ignoredServices: '*'
+  routes:
+    event-service:
+        path: /events/**
+        serviceId: event-service
+        stripPrefix: false
