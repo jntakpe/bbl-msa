@@ -4,4 +4,6 @@ zuul:
   ignoredServices: '*'
   routes:
     event-service:
-        path: /event-service/**
+      path: /event-service/**
+    notification-service:
+      path: /notification-service/**
