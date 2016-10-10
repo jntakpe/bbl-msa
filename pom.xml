@@ -13,6 +13,7 @@
         <module>registry</module>
         <module>gateway</module>
         <module>event-service</module>
+        <module>notification-service</module>
     </modules>
 
 </project>
