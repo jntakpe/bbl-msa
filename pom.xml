@@ -12,6 +12,7 @@
         <module>config</module>
         <module>registry</module>
         <module>gateway</module>
+        <module>dashboard</module>
         <module>event-service</module>
         <module>notification-service</module>
     </modules>
