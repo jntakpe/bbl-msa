@@ -1,6 +1,5 @@
 package com.sopra.bbl.msa.event.controller;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.sopra.bbl.msa.event.domain.Event;
 import com.sopra.bbl.msa.event.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,6 @@ public class EventController {
         this.eventService = eventService;
     }
 
-    @HystrixCommand
     @RequestMapping(method = RequestMethod.GET)
     public List<Event> findAll() {
         return eventService.findAll();

@@ -1,13 +1,9 @@
 package com.sopra.bbl.msa.event.domain;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
