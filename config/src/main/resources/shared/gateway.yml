@@ -1,5 +1,13 @@
 server:
   port: 8080
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 10000
 zuul:
   ignoredServices: '*'
   routes:

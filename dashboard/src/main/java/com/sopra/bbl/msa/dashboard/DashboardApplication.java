@@ -3,9 +3,9 @@ package com.sopra.bbl.msa.dashboard;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
-import org.springframework.cloud.netflix.turbine.EnableTurbine;
+import org.springframework.cloud.netflix.turbine.stream.EnableTurbineStream;
 
-@EnableTurbine
+@EnableTurbineStream
 @SpringBootApplication
 @EnableHystrixDashboard
 public class DashboardApplication {
