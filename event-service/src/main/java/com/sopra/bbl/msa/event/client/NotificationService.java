@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  * @author jntakpe
  */
-@FeignClient(name = "notification-service")
+@FeignClient(name = "notification-service", fallback = NotificationServiceFallback.class)
 public interface NotificationService {
 
     @RequestMapping(value = "/mails/{to}/{event}", method = RequestMethod.GET)

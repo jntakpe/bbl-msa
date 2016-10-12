@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Services gérant les événements
@@ -34,8 +35,11 @@ public class EventService {
     @Transactional(readOnly = true)
     public List<Event> findAll() {
         LOGGER.debug("Recherche de tous les événements");
-        notificationService.register("test", "AngularJS");
-        return eventRepository.findAll();
+        String register = notificationService.register("test", "AngularJS");
+        return eventRepository.findAll().stream().map(e -> {
+            e.setName(register);
+            return e;
+        }).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
