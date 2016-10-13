@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Services gérant les événements
@@ -35,17 +35,18 @@ public class EventService {
     @Transactional(readOnly = true)
     public List<Event> findAll() {
         LOGGER.debug("Recherche de tous les événements");
-        String register = notificationService.register("test", "AngularJS");
-        return eventRepository.findAll().stream().map(e -> {
-            e.setName(register);
-            return e;
-        }).collect(Collectors.toList());
+        return eventRepository.findAll();
     }
 
     @Transactional(readOnly = true)
     public Event findById(Long id) {
         LOGGER.debug("Rechecher de l'événement possédant l'id {}", id);
-        return eventRepository.findOne(id);
+        Event event = eventRepository.findOne(id);
+        if (event == null) {
+            LOGGER.warn("Impossible de trouver un événement possédant l'id : {}", id);
+            throw new EntityNotFoundException(String.format("Impossible de trouver un événement possédant l'id : %s", id));
+        }
+        return event;
     }
 
 }
