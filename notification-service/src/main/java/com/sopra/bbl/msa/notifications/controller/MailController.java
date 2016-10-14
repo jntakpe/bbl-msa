@@ -1,8 +1,9 @@
 package com.sopra.bbl.msa.notifications.controller;
 
+import com.sopra.bbl.msa.notifications.dto.EventRegistrationDTO;
 import com.sopra.bbl.msa.notifications.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,9 +24,9 @@ public class MailController {
         this.mailService = mailService;
     }
 
-    @RequestMapping(value = "/{to}/{event}", method = RequestMethod.GET)
-    public String register(@PathVariable String to, @PathVariable String event) {
-        mailService.sendRegistrationMail(to, event);
-        return "Mail envoyé !!!";
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public void register(@RequestBody EventRegistrationDTO eventRegistrationDTO) {
+        mailService.sendRegistrationMail(eventRegistrationDTO);
     }
+
 }

@@ -1,5 +1,6 @@
 package com.sopra.bbl.msa.event.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sopra.bbl.msa.commons.jpa.IdentifiableEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -19,6 +20,7 @@ public class Attendee extends IdentifiableEntity {
 
     private String login;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "attendees")
     private Set<Event> events = new HashSet<>();
 

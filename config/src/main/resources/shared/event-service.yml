@@ -1,6 +1,9 @@
 server:
   port: 8180
 spring:
+  jackson:
+    serialization:
+      write_dates_as_timestamps: false
   datasource:
     url: jdbc:postgresql://localhost:5432/bblmsa
     username: postgres
@@ -9,3 +12,6 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
+security:
+  basic:
+    enabled: false

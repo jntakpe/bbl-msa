@@ -1,7 +1,8 @@
 package com.sopra.bbl.msa.event.client;
 
+import com.sopra.bbl.msa.event.dto.EventRegistrationDTO;
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient(name = "notification-service", fallback = NotificationServiceFallback.class)
 public interface NotificationService {
 
-    @RequestMapping(value = "/mails/{to}/{event}", method = RequestMethod.GET)
-    String register(@PathVariable("to") String to, @PathVariable("event") String event);
+    @RequestMapping(value = "/mails/register", method = RequestMethod.POST)
+    void register(@RequestBody EventRegistrationDTO eventRegistrationDTO);
 
 }
