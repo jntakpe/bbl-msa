@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.sopra.bbl</groupId>
-    <artifactId>msa</artifactId>
+    <artifactId>bbl-msa</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>bbl-msa</name>
