@@ -13,15 +13,12 @@ public class RegistrationDTO {
 
     private String username;
 
-    private boolean mailSent;
-
     public RegistrationDTO() {
     }
 
-    public RegistrationDTO(String eventName, String username, boolean mailSent) {
+    public RegistrationDTO(String eventName, String username) {
         this.eventName = eventName;
         this.username = username;
-        this.mailSent = mailSent;
     }
 
     public String getEventName() {
@@ -40,20 +37,11 @@ public class RegistrationDTO {
         this.username = username;
     }
 
-    public boolean isMailSent() {
-        return mailSent;
-    }
-
-    public void setMailSent(boolean mailSent) {
-        this.mailSent = mailSent;
-    }
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("eventName", eventName)
                 .append("username", username)
-                .append("mailSent", mailSent)
                 .toString();
     }
 }

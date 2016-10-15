@@ -34,10 +34,10 @@ public class RegistrationService {
     @Transactional
     public RegistrationDTO register(Long eventId, Long userId) {
         Event event = eventService.findById(eventId);
-        String email = "totomail";
+        String email = "jocelyn.ntakpe@soprasteria.com";
         LOGGER.info("Enregistrement de l'utilisateur {} à l'événement {}", email, event.getName());
         notificationService.register(new EventRegistrationDTO(event, email));
-        return new RegistrationDTO(event.getName(), email, true);
+        return new RegistrationDTO(event.getName(), email);
     }
 
 }

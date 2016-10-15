@@ -42,7 +42,7 @@ public class EventController {
     }
 
     @RequestMapping(value = "/{eventId}/register/{userId}", method = RequestMethod.PUT)
-    public RegistrationDTO register(@PathVariable Long eventId, @PathVariable Long userId) {
+    public RegistrationDTO register(@PathVariable Long eventId, @PathVariable(required = false) Long userId) {
         return registrationService.register(eventId, userId);
     }
 

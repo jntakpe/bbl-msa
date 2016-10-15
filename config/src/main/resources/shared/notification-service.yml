@@ -1,6 +1,17 @@
 server:
   port: 8280
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: demobblmsa@gmail.com
+    password: demobblmsa31
+    properties:
+      mail.smtp.starttls.enable: true
+      mail.smtp.auth: true
+      mail.smtp.ssl.trust: smtp.gmail.com
+    tls: true
+    auth: true
   jackson:
     serialization:
       write_dates_as_timestamps: false

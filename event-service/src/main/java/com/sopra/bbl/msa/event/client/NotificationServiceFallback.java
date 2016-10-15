@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
+ * Fallback du service de notification
+ *
  * @author jntakpe
  */
 @Component
@@ -16,6 +18,7 @@ public class NotificationServiceFallback implements NotificationService {
 
     @Override
     public void register(@RequestBody EventRegistrationDTO event) {
-        LOGGER.warn("Impossible d'envoyer le mail d'enregistrement à l'utilisateur {} pour l'événement {}", event.getTo(), event.getName());
+        LOGGER.warn("Erreur lors de l'envoi du mail d'enregistrement à l'utilisateur {} pour l'événement {}", event.getTo(),
+                event.getName());
     }
 }
