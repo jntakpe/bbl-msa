@@ -9,3 +9,13 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
+auth:
+  oauth2:
+    clients:
+      - id: bblmsa
+        secret: bblmsasecret
+        authorizedGrantTypes:
+          - password
+          - refresh_token
+        scopes:
+          - openid

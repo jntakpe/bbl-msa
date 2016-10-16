@@ -1,5 +1,7 @@
 package com.sopra.bbl.msa.auth.config;
 
+import com.sopra.bbl.msa.auth.config.properties.OAuth2Client;
+import com.sopra.bbl.msa.auth.config.properties.OAuth2Properties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,9 +26,12 @@ public class AuthServerConfiguration extends AuthorizationServerConfigurerAdapte
 
     private final AuthenticationManager authenticationManager;
 
+    private final OAuth2Properties oAuth2Properties;
+
     @Autowired
-    public AuthServerConfiguration(AuthenticationManager authenticationManager) {
+    public AuthServerConfiguration(AuthenticationManager authenticationManager, OAuth2Properties oAuth2Properties) {
         this.authenticationManager = authenticationManager;
+        this.oAuth2Properties = oAuth2Properties;
     }
 
     @Bean
@@ -42,13 +47,8 @@ public class AuthServerConfiguration extends AuthorizationServerConfigurerAdapte
     }
 
     @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients
-                .inMemory()
-                .withClient("bblmsa")
-                .secret("bblmsasecret")
-                .authorizedGrantTypes("password")
-                .scopes("openid");
+    public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
+        oAuth2Properties.getClients().forEach(client -> configureClient(configurer, client));
     }
 
     @Override
@@ -57,6 +57,20 @@ public class AuthServerConfiguration extends AuthorizationServerConfigurerAdapte
                 .tokenStore(tokenStore())
                 .accessTokenConverter(jwtAccessTokenConverter())
                 .authenticationManager(this.authenticationManager);
+    }
+
+    private void configureClient(ClientDetailsServiceConfigurer configurer, OAuth2Client client) {
+        try {
+            configurer
+                    .inMemory()
+                    .withClient(client.getId())
+                    .secret(client.getSecret())
+                    .authorizedGrantTypes(client.getAuthorizedGrantTypes().stream().toArray(String[]::new))
+                    .scopes(client.getScopes().stream().toArray(String[]::new));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 }
