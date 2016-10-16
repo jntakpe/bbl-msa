@@ -20,6 +20,8 @@ import static com.sopra.bbl.msa.commons.security.SpringSecurityUser.ROLE_PREFIX;
  */
 public final class SecurityUtils {
 
+    public static final String SIGNING_KEY = "bblmsasupersecureprodreadykey";
+
     private SecurityUtils() {
     }
 

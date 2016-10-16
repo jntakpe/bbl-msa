@@ -2,6 +2,7 @@ package com.sopra.bbl.msa.auth.config;
 
 import com.sopra.bbl.msa.auth.config.properties.OAuth2Client;
 import com.sopra.bbl.msa.auth.config.properties.OAuth2Properties;
+import com.sopra.bbl.msa.commons.security.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,7 +38,7 @@ public class AuthServerConfiguration extends AuthorizationServerConfigurerAdapte
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
-        jwtAccessTokenConverter.setSigningKey("bblmsasigninkey");
+        jwtAccessTokenConverter.setSigningKey(SecurityUtils.SIGNING_KEY);
         return jwtAccessTokenConverter;
     }
 
