@@ -1,6 +1,5 @@
 package com.sopra.bbl.msa.event.service;
 
-import com.sopra.bbl.msa.event.client.NotificationService;
 import com.sopra.bbl.msa.event.domain.Event;
 import com.sopra.bbl.msa.event.repository.EventRepository;
 import org.slf4j.Logger;
@@ -24,12 +23,9 @@ public class EventService {
 
     private final EventRepository eventRepository;
 
-    private final NotificationService notificationService;
-
     @Autowired
-    public EventService(EventRepository eventRepository, NotificationService notificationService) {
+    public EventService(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
-        this.notificationService = notificationService;
     }
 
     @Transactional(readOnly = true)

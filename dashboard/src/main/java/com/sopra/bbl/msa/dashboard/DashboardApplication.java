@@ -5,6 +5,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.cloud.netflix.turbine.stream.EnableTurbineStream;
 
+/**
+ * Classe démarrant l'application de gestion des circuits Hystrix
+ *
+ * @author jntakpe
+ */
 @EnableTurbineStream
 @SpringBootApplication
 @EnableHystrixDashboard

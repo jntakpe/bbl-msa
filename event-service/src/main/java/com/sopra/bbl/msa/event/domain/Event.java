@@ -15,7 +15,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * Bean représentant un événement
+ * Entité représentant un événement
  *
  * @author jntakpe
  */

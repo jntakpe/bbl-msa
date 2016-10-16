@@ -6,6 +6,11 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 
+/**
+ * Classe démarrant l'application de notification
+ *
+ * @author jntakpe
+ */
 @EnableHystrix
 @EnableFeignClients
 @SpringBootApplication

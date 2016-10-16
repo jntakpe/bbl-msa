@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
  * Configuration du serveur authorization
  *
  * @author jntakpe
+ * @see AuthorizationServerConfigurerAdapter
  */
 @Configuration
 @EnableAuthorizationServer
