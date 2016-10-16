@@ -9,6 +9,3 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
-security:
-  basic:
-    enabled: false
