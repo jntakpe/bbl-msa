@@ -10,13 +10,14 @@
     <description>Application de démo pour le BBL microservices</description>
 
     <modules>
+        <module>commons</module>
         <module>config</module>
         <module>registry</module>
         <module>gateway</module>
         <module>dashboard</module>
+        <module>auth-service</module>
         <module>event-service</module>
         <module>notification-service</module>
-        <module>commons</module>
     </modules>
 
 </project>

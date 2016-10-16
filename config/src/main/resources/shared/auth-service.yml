@@ -1,11 +1,8 @@
 server:
-  port: 8180
+  port: 8980
 spring:
-  jackson:
-    serialization:
-      write_dates_as_timestamps: false
   datasource:
-    url: jdbc:postgresql://localhost:5432/bblmsa_event
+    url: jdbc:postgresql://localhost:5432/bblmsa_auth
     username: postgres
     password: sopra*
   jpa:
