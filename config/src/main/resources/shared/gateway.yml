@@ -15,3 +15,9 @@ zuul:
       path: /event-service/**
     notification-service:
       path: /notification-service/**
+    auth-service:
+      path: /auth-service/**
+      sensitiveHeaders:
+security:
+  basic:
+    enabled: false
