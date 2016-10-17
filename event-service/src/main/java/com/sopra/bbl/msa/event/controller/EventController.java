@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.security.RolesAllowed;
+import java.security.Principal;
 import java.util.List;
 
 /**
@@ -41,9 +43,15 @@ public class EventController {
         return eventService.findById(id);
     }
 
-    @RequestMapping(value = "/{eventId}/register/{userId}", method = RequestMethod.PUT)
-    public RegistrationDTO register(@PathVariable Long eventId, @PathVariable(required = false) Long userId) {
-        return registrationService.register(eventId, userId);
+    @RequestMapping(value = "/{eventId}/register", method = RequestMethod.PUT)
+    public RegistrationDTO register(@PathVariable Long eventId, Principal principal) {
+        return registrationService.register(eventId, principal.getName());
+    }
+
+    @RolesAllowed("ADMIN")
+    @RequestMapping(value = "/{eventId}/register/{username}", method = RequestMethod.PUT)
+    public RegistrationDTO register(@PathVariable Long eventId, @PathVariable String username) {
+        return registrationService.register(eventId, username);
     }
 
 }

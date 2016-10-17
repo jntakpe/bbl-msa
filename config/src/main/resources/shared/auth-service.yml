@@ -22,11 +22,3 @@ auth:
           - refresh_token
         scopes:
           - openid
-      - id: pib
-        secret: pibsecret
-        authorizedGrantTypes:
-          - password
-          - refresh_token
-        scopes:
-          - read
-          - write

@@ -62,6 +62,7 @@ public class AuthServerConfiguration extends AuthorizationServerConfigurerAdapte
 
     @Override
     public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
+        //FIXME la boucle ne fonctionne pas correctement
         oAuth2Properties.getClients().forEach(client -> configureClient(configurer, client));
     }
 

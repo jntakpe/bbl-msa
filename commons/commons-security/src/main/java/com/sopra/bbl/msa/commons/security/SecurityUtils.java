@@ -3,6 +3,7 @@ package com.sopra.bbl.msa.commons.security;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Collections;
@@ -11,8 +12,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.sopra.bbl.msa.commons.security.SpringSecurityUser.ROLE_PREFIX;
-
 /**
  * Utilitaires de sécurité
  *
@@ -20,21 +19,20 @@ import static com.sopra.bbl.msa.commons.security.SpringSecurityUser.ROLE_PREFIX;
  */
 public final class SecurityUtils {
 
-    public static final String SIGNING_KEY = "bblmsasupersecureprodreadykey";
+    public static final String ROLE_PREFIX = "ROLE_";
 
     private SecurityUtils() {
     }
 
-    public static Optional<SpringSecurityUser> getCurrentUser() {
+    public static Optional<User> getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.getPrincipal() instanceof SpringSecurityUser) {
-            SpringSecurityUser securityUser = (SpringSecurityUser) authentication.getPrincipal();
-            return Optional.of(securityUser);
+        if (authentication != null && authentication.getPrincipal() instanceof User) {
+            return Optional.of((User) authentication.getPrincipal());
         }
         return Optional.empty();
     }
 
-    public static SpringSecurityUser getCurrentUserOrThrow() {
+    public static User getCurrentUserOrThrow() {
         return getCurrentUser().orElseThrow(() -> new UsernameNotFoundException("Impossible de récupérer l'utilisateur courant"));
     }
 
@@ -43,7 +41,7 @@ public final class SecurityUtils {
             return Collections.singletonList(new SimpleGrantedAuthority(AuthoritiesConstants.USER));
         }
         return authorities.stream()
-                .map(a -> new SimpleGrantedAuthority(ROLE_PREFIX + a))
+                .map(role -> new SimpleGrantedAuthority(ROLE_PREFIX + role))
                 .collect(Collectors.toList());
     }
 

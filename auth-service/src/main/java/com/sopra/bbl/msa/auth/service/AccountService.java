@@ -3,6 +3,7 @@ package com.sopra.bbl.msa.auth.service;
 import com.sopra.bbl.msa.auth.domain.Account;
 import com.sopra.bbl.msa.auth.domain.Authority;
 import com.sopra.bbl.msa.auth.repository.AccountRepository;
+import com.sopra.bbl.msa.commons.security.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -35,7 +36,10 @@ public class AccountService implements UserDetailsService {
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         Account account = accountRepository.findByLogin(login);
-        List<String> authsNames = account.getAuthorities().stream().map(Authority::getName).collect(Collectors.toList());
+        List<String> authsNames = account.getAuthorities().stream()
+                .map(Authority::getName)
+                .map(role -> SecurityUtils.ROLE_PREFIX + role)
+                .collect(Collectors.toList());
         List<GrantedAuthority> auths = AuthorityUtils.createAuthorityList(authsNames.toArray(new String[authsNames.size()]));
         return new User(account.getLogin(), account.getPassword(), auths);
     }
