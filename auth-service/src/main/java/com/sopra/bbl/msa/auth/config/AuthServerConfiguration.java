@@ -2,10 +2,11 @@ package com.sopra.bbl.msa.auth.config;
 
 import com.sopra.bbl.msa.auth.config.properties.OAuth2Client;
 import com.sopra.bbl.msa.auth.config.properties.OAuth2Properties;
-import com.sopra.bbl.msa.commons.security.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -14,6 +15,9 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
+
+import java.security.KeyPair;
 
 /**
  * Configuration du serveur authorization
@@ -25,20 +29,29 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @EnableAuthorizationServer
 public class AuthServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
+    public static final String CERT_ALIAS = "bblmsacert";
+
     private final AuthenticationManager authenticationManager;
 
     private final OAuth2Properties oAuth2Properties;
 
+    private final ResourceLoader resourceLoader;
+
     @Autowired
-    public AuthServerConfiguration(AuthenticationManager authenticationManager, OAuth2Properties oAuth2Properties) {
+    public AuthServerConfiguration(AuthenticationManager authenticationManager,
+                                   OAuth2Properties oAuth2Properties,
+                                   ResourceLoader resourceLoader) {
         this.authenticationManager = authenticationManager;
         this.oAuth2Properties = oAuth2Properties;
+        this.resourceLoader = resourceLoader;
     }
 
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
-        jwtAccessTokenConverter.setSigningKey(SecurityUtils.SIGNING_KEY);
+        Resource cert = resourceLoader.getResource(oAuth2Properties.getCertFilePath());
+        KeyPair keyPair = new KeyStoreKeyFactory(cert, oAuth2Properties.getCertPassword().toCharArray()).getKeyPair(CERT_ALIAS);
+        jwtAccessTokenConverter.setKeyPair(keyPair);
         return jwtAccessTokenConverter;
     }
 

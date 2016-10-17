@@ -1,5 +1,6 @@
 server:
   port: 8980
+  use-forward-headers: true
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/bblmsa_auth
@@ -11,6 +12,8 @@ spring:
       ddl-auto: create
 auth:
   oauth2:
+    certFilePath: classpath:bblmsacert.jks
+    certPassword: sopra*
     clients:
       - id: bblmsa
         secret: bblmsasecret
@@ -19,3 +22,11 @@ auth:
           - refresh_token
         scopes:
           - openid
+      - id: pib
+        secret: pibsecret
+        authorizedGrantTypes:
+          - password
+          - refresh_token
+        scopes:
+          - read
+          - write
