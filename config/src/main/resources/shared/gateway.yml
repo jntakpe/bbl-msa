@@ -19,5 +19,12 @@ zuul:
       path: /auth-service/**
       sensitiveHeaders:
 security:
-  basic:
-    enabled: false
+  oauth2:
+    client:
+      accessTokenUri: http://localhost:8980/oauth/token
+      userAuthorizationUri: http://localhost:8980/oauth/authorize
+      clientId: bblmsa
+      clientSecret: bblmsasecret
+    resource:
+      jwt:
+        keyValue: bblmsasupersecureprodreadykey
