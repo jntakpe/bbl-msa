@@ -16,6 +16,10 @@ zuul:
       sensitiveHeaders:
     notification-service:
       path: /notification-service/**
+      sensitiveHeaders:
+    profile-service:
+      path: /profile-service/**
+      sensitiveHeaders:
     auth-service:
       path: /auth-service/**
       sensitiveHeaders:
