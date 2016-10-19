@@ -7,12 +7,12 @@ import javax.persistence.Entity;
 import java.util.Objects;
 
 /**
- * Entité représentant un utilisateur de l'application
+ * Entité représentant un profil utilisateur de l'application
  *
  * @author jntakpe
  */
 @Entity
-public class User extends IdentifiableEntity {
+public class Profile extends IdentifiableEntity {
 
     @Column(unique = true)
     private String login;
@@ -61,11 +61,11 @@ public class User extends IdentifiableEntity {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof User)) {
+        if (!(o instanceof Profile)) {
             return false;
         }
-        User user = (User) o;
-        return Objects.equals(login, user.login);
+        Profile profile = (Profile) o;
+        return Objects.equals(login, profile.login);
     }
 
     @Override

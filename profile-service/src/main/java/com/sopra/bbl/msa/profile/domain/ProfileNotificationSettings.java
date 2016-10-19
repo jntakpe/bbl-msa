@@ -8,17 +8,17 @@ import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 /**
- * Entité paramétrant les {@link Notification} pour chaque {@link User}
+ * Entité paramétrant les {@link Notification} pour chaque {@link Profile}
  *
  * @author jntakpe
  */
 @Entity
-public class UserNotificationSettings extends IdentifiableEntity {
+public class ProfileNotificationSettings extends IdentifiableEntity {
 
     private boolean accept;
 
     @ManyToOne(optional = false)
-    private User user;
+    private Profile profile;
 
     @ManyToOne(optional = false)
     private Notification notification;
@@ -31,12 +31,12 @@ public class UserNotificationSettings extends IdentifiableEntity {
         this.accept = accept;
     }
 
-    public User getUser() {
-        return user;
+    public Profile getProfile() {
+        return profile;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 
     public Notification getNotification() {
@@ -52,24 +52,24 @@ public class UserNotificationSettings extends IdentifiableEntity {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof UserNotificationSettings)) {
+        if (!(o instanceof ProfileNotificationSettings)) {
             return false;
         }
-        UserNotificationSettings that = (UserNotificationSettings) o;
-        return Objects.equals(user, that.user) &&
+        ProfileNotificationSettings that = (ProfileNotificationSettings) o;
+        return Objects.equals(profile, that.profile) &&
                 Objects.equals(notification, that.notification);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user, notification);
+        return Objects.hash(profile, notification);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("accept", accept)
-                .append("user", user)
+                .append("user", profile)
                 .append("notification", notification)
                 .toString();
     }
