@@ -1,5 +1,6 @@
 package com.sopra.bbl.msa.event.service;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.sopra.bbl.msa.event.domain.Event;
 import com.sopra.bbl.msa.event.dto.EventRegistrationDTO;
 import com.sopra.bbl.msa.event.dto.RegistrationDTO;
@@ -30,6 +31,7 @@ public class RegistrationService {
         this.eventService = eventService;
     }
 
+    @HystrixCommand
     @Transactional(readOnly = true)
     public RegistrationDTO register(Long eventId, String username) {
         Event event = eventService.findById(eventId);

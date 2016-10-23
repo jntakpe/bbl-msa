@@ -1,5 +1,6 @@
 package com.sopra.bbl.msa.notifications.service;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.sopra.bbl.msa.notifications.client.ProfileClient;
 import com.sopra.bbl.msa.notifications.dto.EventRegistrationDTO;
 import com.sopra.bbl.msa.notifications.dto.NotificationType;
@@ -9,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
-import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -29,7 +29,6 @@ import java.util.StringJoiner;
  * @author jntakpe
  */
 @Service
-@EnableBinding(Sink.class)
 public class MailService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MailService.class);
@@ -49,6 +48,7 @@ public class MailService {
         this.profileClient = profileClient;
     }
 
+    @HystrixCommand
     @StreamListener(Sink.INPUT)
     public void onRegistrationNotification(EventRegistrationDTO event) {
         LOGGER.info("Réception du message de confirmation à l'événement {} pour l'utilisateur {}", event.getName(), event.getTo());
