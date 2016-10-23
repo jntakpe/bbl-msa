@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 /**
  * Classe démarrant l'application de gestion des profils
@@ -15,7 +14,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @EnableHystrix
 @EnableFeignClients
 @EnableDiscoveryClient
-@EnableResourceServer
 @SpringBootApplication
 public class ProfileServiceApplication {
 

@@ -3,9 +3,8 @@ server:
   use-forward-headers: true
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/bblmsa_auth
-    username: postgres
-    password: sopra*
+    url: jdbc:h2:file:./target/h2db/db/auth;DB_CLOSE_DELAY=-1
+    username: auth
   jpa:
     show-sql: true
     hibernate:

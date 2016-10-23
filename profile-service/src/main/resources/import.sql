@@ -1,10 +1,10 @@
 --@formatter:off
 
 -- Table profile
-INSERT INTO profile(email, first_name, last_name, login) VALUES ('jocelyn.ntakpe@sopragroup.com', 'Jocelyn', 'N''TAKPE', 'jntakpe');
-INSERT INTO profile(email, first_name, last_name, login) VALUES ('bruno.poindron@sopragroup.com', 'Bruno', 'POINDRON', 'bpoindron');
-INSERT INTO profile(email, first_name, last_name, login) VALUES ('cyril.barillet@sopragroup.com', 'Cyril', 'Barillet', 'cbarillet');
-INSERT INTO profile(email, first_name, last_name, login) VALUES ('rudy.jansem@sopragroup.com', 'Rudy', 'JANSEM', 'rjansem');
+INSERT INTO profile(email, first_name, last_name, login) VALUES ('jocelyn.ntakpe@soprasteria.com', 'Jocelyn', 'N''TAKPE', 'jntakpe');
+INSERT INTO profile(email, first_name, last_name, login) VALUES ('bruno.poindron@soprasteria.com', 'Bruno', 'POINDRON', 'bpoindron');
+INSERT INTO profile(email, first_name, last_name, login) VALUES ('cyril.barillet@soprasteria.com', 'Cyril', 'Barillet', 'cbarillet');
+INSERT INTO profile(email, first_name, last_name, login) VALUES ('rudy.jansem@soprasteria.com', 'Rudy', 'JANSEM', 'rjansem');
 
 -- Table notification
 INSERT INTO notification(type) VALUES ('New event');

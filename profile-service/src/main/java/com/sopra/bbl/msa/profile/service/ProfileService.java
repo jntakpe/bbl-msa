@@ -6,7 +6,6 @@ import com.sopra.bbl.msa.profile.repository.ProfileRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +31,6 @@ public class ProfileService {
         LOGGER.debug("Recherche du profil de l'utilisateur {}", login);
         return profileRepository.findByLoginIgnoreCase(login)
                 .map(ProfileNotificationDTO::new)
-                .orElseThrow(() -> new UsernameNotFoundException("Impossible de trouver le profile de l'utilisateur login"));
+                .orElseThrow(() -> new IllegalStateException(String.format("Impossible de trouver le profil %s", login)));
     }
 }

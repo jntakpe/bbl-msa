@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  * @author jntakpe
  */
-@FeignClient(name = "notification-service", fallback = NotificationServiceFallback.class)
-public interface NotificationService {
+@FeignClient(name = "notification-service")
+public interface NotificationClient {
 
     @RequestMapping(value = "/mails/register", method = RequestMethod.POST)
-    void register(@RequestBody EventRegistrationDTO eventRegistrationDTO);
+    String register(@RequestBody EventRegistrationDTO eventRegistrationDTO);
 
 }

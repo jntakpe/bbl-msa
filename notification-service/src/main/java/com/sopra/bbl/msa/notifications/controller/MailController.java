@@ -25,8 +25,8 @@ public class MailController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public void register(@RequestBody EventRegistrationDTO eventRegistrationDTO) {
-        mailService.sendRegistrationMail(eventRegistrationDTO);
+    public String register(@RequestBody EventRegistrationDTO eventRegistrationDTO) {
+        return mailService.sendRegistrationMail(eventRegistrationDTO);
     }
 
 }

@@ -7,7 +7,7 @@ hystrix:
         isolation:
           strategy: THREAD
           thread:
-            timeoutInMilliseconds: 10000
+            timeoutInMilliseconds: 5000
 zuul:
   ignoredServices: '*'
   routes:
@@ -25,7 +25,7 @@ zuul:
       sensitiveHeaders:
   add-proxy-headers: true
 security:
-  ignored: /auth-service/oauth/**
+  ignored: /auth-service/oauth/**,/profile-service/**
   basic:
     enabled: false
   oauth2:

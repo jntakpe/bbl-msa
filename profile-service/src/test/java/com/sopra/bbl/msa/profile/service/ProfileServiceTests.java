@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,7 +34,7 @@ public class ProfileServiceTests extends AbstractDBServiceTests {
         assertThat(profileService.findByLogin("JntaKpe")).isNotNull();
     }
 
-    @Test(expected = UsernameNotFoundException.class)
+    @Test(expected = IllegalStateException.class)
     public void findByLogin_shouldNotFindCuzUnknownLogin() {
         profileService.findByLogin("Unknown");
         fail("should have failed at this point");

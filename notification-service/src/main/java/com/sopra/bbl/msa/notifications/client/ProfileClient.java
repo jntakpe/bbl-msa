@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  * @author jntakpe
  */
-@FeignClient("profile-service")
-public interface ProfileService {
+@FeignClient(name = "profile-service", fallback = ProfileClientFallback.class)
+public interface ProfileClient {
 
     @RequestMapping(value = "profiles/{login}", method = RequestMethod.GET)
     ProfileNotificationDTO findProfileByLogin(@PathVariable("login") String login);

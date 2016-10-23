@@ -4,6 +4,7 @@ package com.sopra.bbl.msa.notifications.dto;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -14,10 +15,13 @@ import java.time.temporal.ChronoUnit;
  */
 public class EventRegistrationDTO {
 
+    @NotNull
     private String to;
 
+    @NotNull
     private String name;
 
+    @NotNull
     private String type;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)

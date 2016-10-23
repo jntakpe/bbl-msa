@@ -1,6 +1,6 @@
 package com.sopra.bbl.msa.event.service;
 
-import com.sopra.bbl.msa.event.client.NotificationService;
+import com.sopra.bbl.msa.event.client.NotificationClient;
 import com.sopra.bbl.msa.event.domain.Event;
 import com.sopra.bbl.msa.event.dto.EventRegistrationDTO;
 import com.sopra.bbl.msa.event.dto.RegistrationDTO;
@@ -8,8 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Service permettant de s'enregistrer et désinscrire d'un événement
@@ -21,22 +20,21 @@ public class RegistrationService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationService.class);
 
-    private final NotificationService notificationService;
+    private final NotificationClient notificationClient;
 
     private final EventService eventService;
 
     @Autowired
-    public RegistrationService(NotificationService notificationService, EventService eventService) {
-        this.notificationService = notificationService;
+    public RegistrationService(NotificationClient notificationClient, EventService eventService) {
+        this.notificationClient = notificationClient;
         this.eventService = eventService;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public RegistrationDTO register(Long eventId, String username) {
         Event event = eventService.findById(eventId);
-        String email = "jocelyn.ntakpe@soprasteria.com";
-        LOGGER.info("Enregistrement de l'utilisateur {} à l'événement {}", email, event.getName());
-        notificationService.register(new EventRegistrationDTO(event, email));
+        LOGGER.info("Enregistrement de l'utilisateur {} à l'événement {}", username, event.getName());
+        String email = notificationClient.register(new EventRegistrationDTO(event, username));
         return new RegistrationDTO(event.getName(), email);
     }
 
