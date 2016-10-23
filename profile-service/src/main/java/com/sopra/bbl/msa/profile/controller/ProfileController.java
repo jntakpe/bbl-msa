@@ -1,5 +1,6 @@
 package com.sopra.bbl.msa.profile.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.sopra.bbl.msa.profile.dto.ProfileNotificationDTO;
 import com.sopra.bbl.msa.profile.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
+    @HystrixCommand
     @RequestMapping(value = "/{login}", method = RequestMethod.GET)
     public ProfileNotificationDTO findByLogin(@PathVariable String login) {
         return profileService.findByLogin(login);

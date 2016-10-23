@@ -1,5 +1,6 @@
 package com.sopra.bbl.msa.event.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.sopra.bbl.msa.event.domain.Event;
 import com.sopra.bbl.msa.event.dto.RegistrationDTO;
 import com.sopra.bbl.msa.event.service.EventService;
@@ -43,11 +44,13 @@ public class EventController {
         return eventService.findById(id);
     }
 
+    @HystrixCommand
     @RequestMapping(value = "/{eventId}/register", method = RequestMethod.PUT)
     public RegistrationDTO register(@PathVariable Long eventId, Principal principal) {
         return registrationService.register(eventId, principal.getName());
     }
 
+    @HystrixCommand
     @RolesAllowed("ADMIN")
     @RequestMapping(value = "/{eventId}/register/{username}", method = RequestMethod.PUT)
     public RegistrationDTO register(@PathVariable Long eventId, @PathVariable String username) {

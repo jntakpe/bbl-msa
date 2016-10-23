@@ -1,6 +1,5 @@
 package com.sopra.bbl.msa.event.service;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.sopra.bbl.msa.event.domain.Event;
 import com.sopra.bbl.msa.event.dto.EventRegistrationDTO;
 import com.sopra.bbl.msa.event.dto.RegistrationDTO;
@@ -25,20 +24,24 @@ public class RegistrationService {
 
     private final EventService eventService;
 
+    private final AttendeeService attendeeService;
+
     @Autowired
-    public RegistrationService(NotificationSource notificationSource, EventService eventService) {
+    public RegistrationService(NotificationSource notificationSource, EventService eventService, AttendeeService attendeeService) {
         this.notificationSource = notificationSource;
         this.eventService = eventService;
+        this.attendeeService = attendeeService;
     }
 
-    @HystrixCommand
-    @Transactional(readOnly = true)
+    @Transactional
     public RegistrationDTO register(Long eventId, String username) {
         Event event = eventService.findById(eventId);
+        attendeeService.registerAttendee(username, event);
         LOGGER.info("Enregistrement de l'utilisateur {} à l'événement {}", username, event.getName());
         notifyRegistration(new EventRegistrationDTO(event, username));
         return new RegistrationDTO(event.getName(), username);
     }
+
 
     private void notifyRegistration(EventRegistrationDTO event) {
         LOGGER.info("Notification à l'utilisateur {} pour l'événement {} du {}", event.getTo(), event.getName(), event.getStart());
