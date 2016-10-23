@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 /**
  * Contrôleur gérant les {@link ProfileNotificationDTO}
  *
@@ -28,10 +26,6 @@ public class ProfileController {
 
     @RequestMapping(value = "/{login}", method = RequestMethod.GET)
     public ProfileNotificationDTO findByLogin(@PathVariable String login) {
-        int i = ThreadLocalRandom.current().nextInt(0, 3);
-        if (i == 0) {
-            throw new IllegalStateException("Stupid exceptioon");
-        }
         return profileService.findByLogin(login);
     }
 }
