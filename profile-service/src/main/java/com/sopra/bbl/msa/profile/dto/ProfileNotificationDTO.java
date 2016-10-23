@@ -1,5 +1,6 @@
 package com.sopra.bbl.msa.profile.dto;
 
+import com.sopra.bbl.msa.profile.domain.NotificationType;
 import com.sopra.bbl.msa.profile.domain.Profile;
 import com.sopra.bbl.msa.profile.domain.ProfileNotificationSettings;
 
@@ -22,7 +23,7 @@ public class ProfileNotificationDTO {
 
     private String lastName;
 
-    private Set<String> notifications = new HashSet<>();
+    private Set<NotificationType> notifications = new HashSet<NotificationType>();
 
     public ProfileNotificationDTO() {
     }
@@ -70,11 +71,11 @@ public class ProfileNotificationDTO {
         this.lastName = lastName;
     }
 
-    public Set<String> getNotifications() {
+    public Set<NotificationType> getNotifications() {
         return notifications;
     }
 
-    public void setNotifications(Set<String> notifications) {
+    public void setNotifications(Set<NotificationType> notifications) {
         this.notifications = notifications;
     }
 }

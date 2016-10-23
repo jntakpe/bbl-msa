@@ -14,7 +14,7 @@
         <appender-ref ref="CONSOLE"/>
     </root>
 
-    <logger name="com.sopra.bbl.msa.event" level="TRACE"/>
+    <logger name="com.sopra.bbl.msa.notifications" level="TRACE"/>
     <logger name="javax" level="WARN"/>
     <logger name="com.sun" level="OFF"/>
     <logger name="sun.net" level="OFF"/>
@@ -33,6 +33,7 @@
     <logger name="org.springframework.web" level="WARN"/>
     <logger name="org.springframework.security" level="WARN"/>
     <logger name="io.github.openfeign" level="WARN"/>
+    <logger name="com.netflix" level="WARN"/>
     <logger name="feign.hystrix" level="WARN"/>
     <logger name="springfox" level="WARN"/>
 

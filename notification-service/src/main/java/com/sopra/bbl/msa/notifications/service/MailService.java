@@ -2,12 +2,16 @@ package com.sopra.bbl.msa.notifications.service;
 
 import com.sopra.bbl.msa.notifications.client.ProfileClient;
 import com.sopra.bbl.msa.notifications.dto.EventRegistrationDTO;
+import com.sopra.bbl.msa.notifications.dto.NotificationType;
 import com.sopra.bbl.msa.notifications.dto.ProfileNotificationDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -25,6 +29,7 @@ import java.util.StringJoiner;
  * @author jntakpe
  */
 @Service
+@EnableBinding(Sink.class)
 public class MailService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MailService.class);
@@ -44,17 +49,26 @@ public class MailService {
         this.profileClient = profileClient;
     }
 
-    public String sendRegistrationMail(EventRegistrationDTO event) {
-        Optional<ProfileNotificationDTO> optProfile = findProfileInfos(event.getTo());
-        if (optProfile.isPresent()) {
-            ProfileNotificationDTO profile = optProfile.get();
-            MimeMessage message = createMessage(profile.getEmail(), CONFIRMATION_SUBJECT, mailText(event, profile));
-            //javaMailSender.send(message);
-            LOGGER.info("Envoi d'un mail de confirmation de participation à l'événement {} à l'addresse '{}'", event.getName(),
-                    profile.getEmail());
-            return profile.getEmail();
+    @StreamListener(Sink.INPUT)
+    public void onRegistrationNotification(EventRegistrationDTO event) {
+        LOGGER.info("Réception du message de confirmation à l'événement {} pour l'utilisateur {}", event.getName(), event.getTo());
+        findProfileInfos(event.getTo())
+                .filter(this::authorizeRegistrationNotification)
+                .map(p -> createMessage(p.getEmail(), CONFIRMATION_SUBJECT, mailText(event, p)))
+                .ifPresent(m -> sendMail(event, m));
+    }
+
+    private void sendMail(EventRegistrationDTO event, MimeMessage message) {
+        //javaMailSender.send(message);
+        LOGGER.info("Envoi d'un mail de confirmation de participation à l'événement {} à {}", event.getName(), event.getTo());
+    }
+
+    private boolean authorizeRegistrationNotification(ProfileNotificationDTO profile) {
+        boolean authorize = profile.getNotifications().contains(NotificationType.REGISTRATION);
+        if (!authorize) {
+            LOGGER.warn("L'utilisateur {} n'autorise pas les notifications d'enregistrement aux sessions", profile.getLogin());
         }
-        return "noone@mail.com";
+        return authorize;
     }
 
     private MimeMessage createMessage(String to, String subject, String content) {

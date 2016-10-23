@@ -11,6 +11,12 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: notifications
+          content-type: application/json
 security:
   oauth2:
     resource:

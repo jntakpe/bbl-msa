@@ -14,7 +14,7 @@
         <appender-ref ref="CONSOLE"/>
     </root>
 
-    <logger name="com.sopra.bbl.msa.event" level="TRACE"/>
+    <logger name="com.sopra.bbl.msa.profile" level="TRACE"/>
     <logger name="javax" level="WARN"/>
     <logger name="com.sun" level="OFF"/>
     <logger name="sun.net" level="OFF"/>

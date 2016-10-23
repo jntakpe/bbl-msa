@@ -18,7 +18,7 @@ public class ProfileNotificationDTO {
 
     private String lastName;
 
-    private Set<String> notifications = new HashSet<>();
+    private Set<NotificationType> notifications = new HashSet<NotificationType>();
 
     public String getLogin() {
         return login;
@@ -52,11 +52,11 @@ public class ProfileNotificationDTO {
         this.lastName = lastName;
     }
 
-    public Set<String> getNotifications() {
+    public Set<NotificationType> getNotifications() {
         return notifications;
     }
 
-    public void setNotifications(Set<String> notifications) {
+    public void setNotifications(Set<NotificationType> notifications) {
         this.notifications = notifications;
     }
 }
