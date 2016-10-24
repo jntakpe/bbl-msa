@@ -1,34 +1,34 @@
 package com.sopra.bbl.msa.profile.controller;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.sopra.bbl.msa.profile.dto.ProfileNotificationDTO;
 import com.sopra.bbl.msa.profile.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Set;
+
 /**
- * Contrôleur gérant les {@link ProfileNotificationDTO}
+ * Controller gérant les adresses mails des profils
  *
  * @author jntakpe
  */
 @RestController
-@RequestMapping("profiles")
-public class ProfileController {
+@RequestMapping("mails")
+public class MailController {
 
     private final ProfileService profileService;
 
     @Autowired
-    public ProfileController(ProfileService profileService) {
+    public MailController(ProfileService profileService) {
         this.profileService = profileService;
     }
 
     @HystrixCommand
-    @RequestMapping(value = "/{login}", method = RequestMethod.GET)
-    public ProfileNotificationDTO findByLogin(@PathVariable String login) {
-        return profileService.findByLogin(login);
+    @RequestMapping(value = "logins", method = RequestMethod.GET)
+    public Set<String> findMailsWithLogins(@RequestParam Set<String> logins) {
+        return profileService.findMailsWithLogins(logins);
     }
-
 }

@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 /**
  * Services associés à l'entité {@link Profile}
  *
@@ -32,5 +36,14 @@ public class ProfileService {
         return profileRepository.findByLoginIgnoreCase(login)
                 .map(ProfileNotificationDTO::new)
                 .orElseThrow(() -> new IllegalStateException(String.format("Impossible de trouver le profil %s", login)));
+    }
+
+    @Transactional(readOnly = true)
+    public Set<String> findMailsWithLogins(Set<String> logins) {
+        LOGGER.debug("Recherche des adresses mails pour les logins {}", logins);
+        if (logins.isEmpty()) {
+            return Collections.emptySet();
+        }
+        return profileRepository.findByLoginIn(logins).stream().map(Profile::getEmail).collect(Collectors.toSet());
     }
 }
