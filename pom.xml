@@ -10,6 +10,7 @@
 
     <modules>
         <module>commons</module>
+        <module>config</module>
         <module>event-service</module>
         <module>profile-service</module>
     </modules>
