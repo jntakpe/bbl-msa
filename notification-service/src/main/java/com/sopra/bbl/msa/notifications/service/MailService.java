@@ -50,7 +50,7 @@ public class MailService {
 
     @HystrixCommand
     @StreamListener(Sink.INPUT)
-    public void onRegistrationNotification(EventRegistrationDTO event) {
+    public void onNotif(EventRegistrationDTO event) {
         LOGGER.info("Réception du message de confirmation à l'événement {} pour l'utilisateur {}", event.getName(), event.getTo());
         findProfileInfos(event.getTo())
                 .filter(this::authorizeRegistrationNotification)

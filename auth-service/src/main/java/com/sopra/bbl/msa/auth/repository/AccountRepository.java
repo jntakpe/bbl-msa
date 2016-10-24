@@ -3,6 +3,8 @@ package com.sopra.bbl.msa.auth.repository;
 import com.sopra.bbl.msa.auth.domain.Account;
 import com.sopra.bbl.msa.commons.jpa.GenericRepostiory;
 
+import java.util.Optional;
+
 /**
  * Repository gérant l'entité {@link Account}
  *
@@ -10,6 +12,6 @@ import com.sopra.bbl.msa.commons.jpa.GenericRepostiory;
  */
 public interface AccountRepository extends GenericRepostiory<Account> {
 
-    Account findByLogin(String login);
+    Optional<Account> findByLogin(String login);
 
 }
