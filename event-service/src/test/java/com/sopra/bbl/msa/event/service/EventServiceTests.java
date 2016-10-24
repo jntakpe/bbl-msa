@@ -29,11 +29,6 @@ public class EventServiceTests extends AbstractDBServiceTests {
     private EventServiceTestsUtils eventServiceTestsUtils;
 
     @Test
-    public void findAll_shouldFindSome() {
-        assertThat(eventService.findAll().size()).isNotZero().isEqualTo(countRowsInCurrentTable());
-    }
-
-    @Test
     public void findById_shouldFindOne() {
         assertThat(eventService.findById(eventServiceTestsUtils.findAnyEvent().getId())).isNotNull();
     }

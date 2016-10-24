@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.security.RolesAllowed;
 import java.security.Principal;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Contrôleur gérant les {@link Event}
@@ -34,14 +34,9 @@ public class EventController {
         this.registrationService = registrationService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public List<Event> findAll() {
-        return eventService.findAll();
-    }
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Event findById(@PathVariable Long id) {
-        return eventService.findById(id);
+    @RequestMapping(value = "/{eventId}/attendees/mails", method = RequestMethod.GET)
+    public Set<String> findAttendeesMails(@PathVariable Long eventId) {
+        return eventService.findAttendeesMails(eventId);
     }
 
     @HystrixCommand

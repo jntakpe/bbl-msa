@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -27,8 +28,11 @@ public class MailController {
     }
 
     @HystrixCommand
-    @RequestMapping(value = "logins", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public Set<String> findMailsWithLogins(@RequestParam Set<String> logins) {
+        if (new Random().nextInt(4) + 1 < 4) {
+            throw new IllegalStateException("Random error");
+        }
         return profileService.findMailsWithLogins(logins);
     }
 }

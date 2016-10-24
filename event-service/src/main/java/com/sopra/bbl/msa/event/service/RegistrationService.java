@@ -42,8 +42,7 @@ public class RegistrationService {
         return new RegistrationDTO(event.getName(), username);
     }
 
-
-    private void notifyRegistration(EventRegistrationDTO event) {
+    public void notifyRegistration(EventRegistrationDTO event) {
         LOGGER.info("Notification à l'utilisateur {} pour l'événement {} du {}", event.getTo(), event.getName(), event.getStart());
         notificationSource.notifyRegistration(event);
     }
