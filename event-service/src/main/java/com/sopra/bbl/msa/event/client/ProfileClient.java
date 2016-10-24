@@ -25,7 +25,7 @@ public class ProfileClient {
     }
 
     public Set<String> findMailsWithLogins(List<String> logins) {
-        UriComponents req = UriComponentsBuilder.fromHttpUrl("http://localhost:8280/mails").queryParam("logins", logins.toArray()).build();
+        UriComponents req = UriComponentsBuilder.fromHttpUrl("http://profile-service/mails").queryParam("logins", logins.toArray()).build();
         System.out.println(req.toString());
         return restTemplate.getForEntity(req.toString(), Set.class).getBody();
     }

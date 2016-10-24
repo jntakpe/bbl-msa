@@ -11,6 +11,7 @@
     <modules>
         <module>commons</module>
         <module>config</module>
+        <module>registry</module>
         <module>event-service</module>
         <module>profile-service</module>
     </modules>
