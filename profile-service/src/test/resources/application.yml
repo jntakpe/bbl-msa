@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:h2:file:./target/h2db/db/profiles-test;DB_CLOSE_DELAY=-1
+    username: profiles-test
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
