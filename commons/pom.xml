@@ -14,6 +14,7 @@
     <modules>
         <module>commons-jpa</module>
         <module>commons-security</module>
+        <module>commons-logging</module>
     </modules>
 
     <properties>

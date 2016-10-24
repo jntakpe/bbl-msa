@@ -41,6 +41,11 @@
             <artifactId>commons-security</artifactId>
             <version>${commons.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.sopra.bbl.msa</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>${commons.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

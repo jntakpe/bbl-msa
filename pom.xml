@@ -19,6 +19,7 @@
         <module>event-service</module>
         <module>notification-service</module>
         <module>profile-service</module>
+        <module>zipkin</module>
     </modules>
 
 </project>
