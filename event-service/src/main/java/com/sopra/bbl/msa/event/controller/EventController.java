@@ -4,6 +4,8 @@ import com.sopra.bbl.msa.event.domain.Event;
 import com.sopra.bbl.msa.event.dto.RegistrationDTO;
 import com.sopra.bbl.msa.event.service.EventService;
 import com.sopra.bbl.msa.event.service.RegistrationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +24,13 @@ import java.util.Set;
 @RequestMapping("events")
 public class EventController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(EventController.class);
+
     private final EventService eventService;
 
     private final RegistrationService registrationService;
+
+    private int callCount = 0;
 
     @Autowired
     public EventController(EventService eventService, RegistrationService registrationService) {
@@ -34,6 +40,7 @@ public class EventController {
 
     @RequestMapping(value = "/{eventId}/attendees/mails", method = RequestMethod.GET)
     public Set<String> findAttendeesMails(@PathVariable Long eventId) {
+        LOGGER.info("Call Events " + ++callCount);
         return eventService.findAttendeesMails(eventId);
     }
 

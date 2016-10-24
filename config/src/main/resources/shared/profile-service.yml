@@ -1,11 +1,11 @@
 server:
-  port: 8280
+  port: ${port:8280}
 spring:
   jackson:
     serialization:
       write_dates_as_timestamps: false
   datasource:
-    url: jdbc:h2:file:./target/h2db/db/profiles;DB_CLOSE_DELAY=-1
+    url: jdbc:h2:mem:profiles:test;DB_CLOSE_DELAY=-1
     username: profiles
   jpa:
     show-sql: true
