@@ -4,6 +4,7 @@ import com.sopra.bbl.msa.commons.logging.IgnoreMetricsSampler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.sleuth.Sampler;
 import org.springframework.context.annotation.Bean;
 
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Bean;
  *
  * @author jntakpe
  */
+@EnableHystrix
 @SpringBootApplication
 @EnableDiscoveryClient
 public class ProfileServiceApplication {

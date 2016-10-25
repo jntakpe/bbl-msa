@@ -12,6 +12,7 @@
         <module>commons</module>
         <module>config</module>
         <module>registry</module>
+        <module>dashboard</module>
         <module>gateway</module>
         <module>event-service</module>
         <module>profile-service</module>
