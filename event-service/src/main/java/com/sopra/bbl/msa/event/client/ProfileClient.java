@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * @author jntakpe
  */
-@FeignClient(name = "profile-service")
+@FeignClient(name = "profile-service", fallback = ProfileClientFallback.class)
 public interface ProfileClient {
 
     @RequestMapping(value = "/mails", method = RequestMethod.GET)
