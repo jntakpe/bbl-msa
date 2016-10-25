@@ -1,0 +1,31 @@
+<configuration scan="true">
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <root level="TRACE">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <logger name="com.sopra.bbl.msa.notifications" level="TRACE"/>
+    <logger name="javax" level="WARN"/>
+    <logger name="com.sun" level="OFF"/>
+    <logger name="sun.net" level="OFF"/>
+    <logger name="ch.qos.logback" level="WARN"/>
+    <logger name="org.apache" level="WARN"/>
+    <logger name="org.aspectj" level="WARN"/>
+    <logger name="org.jboss" level="WARN"/>
+    <logger name="com.jayway" level="WARN"/>
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="org.hibernate.SQL" level="WARN"/>
+    <logger name="org.hibernate.validator" level="WARN"/>
+    <logger name="org.hibernate.type" level="INFO"/>
+    <logger name="com.zaxxer.hikari" level="WARN"/>
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.springframework.boot" level="WARN"/>
+    <logger name="org.springframework.web" level="WARN"/>
+    <logger name="org.springframework.security" level="WARN"/>
+    <logger name="io.github.openfeign" level="WARN"/>
+    <logger name="com.netflix" level="WARN"/>
+    <logger name="feign.hystrix" level="WARN"/>
+    <logger name="springfox" level="WARN"/>
+
+</configuration>

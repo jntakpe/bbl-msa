@@ -7,7 +7,7 @@ hystrix:
         isolation:
           strategy: THREAD
           thread:
-            timeoutInMilliseconds: 1000
+            timeoutInMilliseconds: 2000
 zuul:
   ignoredServices: '*'
   routes:

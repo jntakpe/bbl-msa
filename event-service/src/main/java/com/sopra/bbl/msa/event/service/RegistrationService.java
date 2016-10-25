@@ -1,5 +1,6 @@
 package com.sopra.bbl.msa.event.service;
 
+import com.sopra.bbl.msa.event.client.NotificationClient;
 import com.sopra.bbl.msa.event.domain.Event;
 import com.sopra.bbl.msa.event.dto.EventRegistrationDTO;
 import com.sopra.bbl.msa.event.dto.RegistrationDTO;
@@ -23,10 +24,13 @@ public class RegistrationService {
 
     private final AttendeeService attendeeService;
 
+    private final NotificationClient notificationClient;
+
     @Autowired
-    public RegistrationService(EventService eventService, AttendeeService attendeeService) {
+    public RegistrationService(EventService eventService, AttendeeService attendeeService, NotificationClient notificationClient) {
         this.eventService = eventService;
         this.attendeeService = attendeeService;
+        this.notificationClient = notificationClient;
     }
 
     @Transactional
@@ -34,12 +38,14 @@ public class RegistrationService {
         Event event = eventService.findById(eventId);
         attendeeService.registerAttendee(username, event);
         LOGGER.info("Enregistrement de l'utilisateur {} à l'événement {}", username, event.getName());
-        notifyRegistration(new EventRegistrationDTO(event, username));
+        String ret = notifyRegistration(new EventRegistrationDTO(event, username));
+        LOGGER.info("Mail envoyé à l'utilisateur {}", ret);
         return new RegistrationDTO(event.getName(), username);
     }
 
-    public void notifyRegistration(EventRegistrationDTO event) {
+    public String notifyRegistration(EventRegistrationDTO event) {
         LOGGER.info("Notification à l'utilisateur {} pour l'événement {} du {}", event.getTo(), event.getName(), event.getStart());
+        return notificationClient.register(event);
     }
 
 }
