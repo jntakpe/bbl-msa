@@ -1,0 +1,21 @@
+server:
+  port: 8080
+zuul:
+  ignoredServices: '*'
+  routes:
+    event-service:
+      path: /event-service/**
+      sensitiveHeaders:
+    notification-service:
+      path: /notification-service/**
+      sensitiveHeaders:
+    profile-service:
+      path: /profile-service/**
+      sensitiveHeaders:
+    auth-service:
+      path: /auth-service/**
+      sensitiveHeaders:
+  add-proxy-headers: true
+security:
+  basic:
+    enabled: false
