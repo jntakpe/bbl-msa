@@ -55,7 +55,12 @@ public class MailService {
     }
 
     private void sendMail(EventRegistrationDTO event, MimeMessage message) {
-        //javaMailSender.send(message);
+        try {
+            Thread.sleep(5000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        javaMailSender.send(message);
         LOGGER.info("Envoi d'un mail de confirmation de participation à l'événement {} à {}", event.getName(), event.getTo());
     }
 
