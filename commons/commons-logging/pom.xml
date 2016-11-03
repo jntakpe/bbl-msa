@@ -7,7 +7,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>commons-security</name>
+    <name>commons-logging</name>
     <description>Projet commun relatif au logging</description>
 
     <parent>
